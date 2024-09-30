@@ -15,12 +15,12 @@ import "./App.css";
 import { CSSTransition } from "react-transition-group";
 import Suggestions from "./components/Suggestions";
 import Calendar from "./components/Calendar";
-import InstagramPost from "./components/InstagramPost";
 import SentimentAnalysis from "./components/SentimentAnalysis";
 import ExportContent from "./components/ExportContent";
 import Dashboard from "./components/Dashboard";
 import SeoSuggestions from "./components/SeoSuggestions";
 import Templates from "./components/Templates";
+import MultiPlatformPost from "./components/MultiPlatformPost";
 
 function App() {
   const [activeTab, setActiveTab] = useState("ideias");
@@ -50,8 +50,6 @@ function App() {
         return <Suggestions />;
       case "calendario":
         return <Calendar />;
-      case "instagram":
-        return <InstagramPost />;
       case "analise":
         return <SentimentAnalysis />;
       case "export":
@@ -64,6 +62,8 @@ function App() {
         return <Templates />;
       default:
         return <GenerateIdeas />;
+      case "multiplatform":
+        return <MultiPlatformPost />;
     }
   };
 
@@ -106,8 +106,11 @@ function App() {
                   <button onClick={() => handleTabChange("calendario")}>
                     Calendário
                   </button>
-                  <button onClick={() => handleTabChange("instagram")}>
-                    Publicar no Instagram
+                  <button
+                    className={activeTab === "multiplatform" ? "active" : ""}
+                    onClick={() => handleTabChange("multiplatform")}
+                  >
+                    Postagem Multiplataforma
                   </button>
                 </div>
               </div>
@@ -148,14 +151,22 @@ function App() {
 
         {token ? (
           <main className="App-main">
-            <CSSTransition in={inProp} timeout={300} classNames="fade" unmountOnExit>
+            <CSSTransition
+              in={inProp}
+              timeout={300}
+              classNames="fade"
+              unmountOnExit
+            >
               {renderTabContent()}
             </CSSTransition>
           </main>
         ) : (
           <Routes>
             <Route path="/login" element={<Login onLogin={handleLogin} />} />
-            <Route path="/register" element={<Register onRegister={handleLogin} />} />
+            <Route
+              path="/register"
+              element={<Register onRegister={handleLogin} />}
+            />
             <Route path="*" element={<Navigate to="/login" />} />
           </Routes>
         )}

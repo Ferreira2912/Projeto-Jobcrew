@@ -174,6 +174,120 @@ p {
   transition: opacity 0.3s ease-out, transform 0.3s ease-out; /* Suavidade de 0.3s */
 }
 
+.multi-platform-post {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.platform-selection {
+  margin-bottom: 20px;
+}
+
+.platform-selection h3,
+.post-editor h3,
+.post-preview h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.platform-selection input {
+  margin-right: 10px;
+}
+
+.post-editor textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.platform-preview {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.platform-preview h4 {
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+}
+
+.schedule-post {
+  margin-top: 20px;
+}
+
+.schedule-post input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.submit-section {
+  margin-top: 20px;
+}
+
+.submit-section button {
+  padding: 12px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.submit-section button:hover {
+  background-color: #0056b3;
+}
+
+.platform-suggestions {
+  margin-top: 20px;
+}
+
+.platform-suggestions h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.platform-suggestions ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.platform-suggestions li {
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.image-selection {
+  margin-top: 20px;
+}
+
+.image-upload {
+  margin-top: 10px;
+}
+
+.image-preview {
+  margin-top: 10px;
+}
+
+.image-preview img {
+  max-width: 100%;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
 /* Estilo do Rodapé */
 .App-footer {
   background-color: #f8f9fa;

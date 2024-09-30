@@ -1,4 +1,5 @@
 require("dotenv").config();
+const cron = require('node-cron');
 const express = require("express");
 const { connectToDatabase } = require("./db");
 const ideasRouter = require("./routes/ideas"); // Importe a rota de ideias
@@ -13,7 +14,7 @@ const analysisRouter = require('./routes/analysis');
 const exportRouter = require('./routes/export');
 const statsRouter = require('./routes/stats');
 const seoRouter = require('./routes/seo');
-const templatesRouter = require('./routes/templates');
+const templatesRouter = require('./routes/templates');  
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -49,3 +50,38 @@ connectToDatabase()
   .catch((error) => {
     console.error("Erro ao iniciar o servidor:", error);
   });
+
+  async function processScheduledPosts() {
+    try {
+      const pendingPosts = await getPendingPosts();
+  
+      for (const post of pendingPosts) {
+        const platformRequests = [];
+        
+        // Verifica cada plataforma e faz a postagem
+        if (post.platforms.facebook) {
+          platformRequests.push(axios.post('/api/facebook/publish', { message: post.content.facebook }));
+        }
+        if (post.platforms.linkedin) {
+          platformRequests.push(axios.post('/api/linkedin/publish', { message: post.content.linkedin }));
+        }
+        if (post.platforms.twitter) {
+          platformRequests.push(axios.post('/api/twitter/publish', { message: post.content.twitter }));
+        }
+        if (post.platforms.instagram) {
+          platformRequests.push(axios.post('/api/instagram/publish', { message: post.content.instagram }));
+        }
+  
+        await Promise.all(platformRequests);
+  
+        // Atualiza o status para 'posted' após o sucesso
+        await updatePostStatus(post._id, 'posted');
+        console.log(`Postagem ${post._id} realizada com sucesso!`);
+      }
+    } catch (error) {
+      console.error('Erro ao processar postagens agendadas:', error);
+    }
+  }
+  
+  // Agendamento para verificar postagens a cada minuto
+  cron.schedule('* * * * *', processScheduledPosts);
