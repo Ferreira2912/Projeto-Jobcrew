@@ -1,6 +1,4 @@
-Aqui está uma sugestão para a descrição do projeto a ser incluída no GitHub:
 
----
 
 # Projeto Jobcrew - Hub de Postagem Multiplataforma
 
